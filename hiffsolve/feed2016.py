@@ -5,6 +5,7 @@ from lxml import objectify
 
 import os
 import requests
+import slugify
 import urllib
 
 
@@ -16,6 +17,10 @@ class Screening:
         self.date = date_parser.parse(str(lxml_event.eventDate))
         self.venue = lxml_event.eventVenue
         self.buy_link = lxml_event.eventBuyLink
+
+    def __repr__(self):
+        sane_date = self.date.strftime('%Y-%m-%d %H:%M')
+        return '{} @ {}'.format(sane_date, self.venue)
 
     def __str__(self):
         sane_date = self.date.strftime('%Y-%m-%d %H:%M')
@@ -106,4 +111,14 @@ class Feed:
         items = rss.channel.iter('item')
 
         return tuple(Item(i) for i in items)
+
+    def find(self, name):
+        """Yes, this is a slow way of doing it. Computers are fast.
+        """
+
+        slug = slugify.slugify(name)
+
+        for movie in self.movies:
+            if movie.slug == slug:
+                return movie
 
