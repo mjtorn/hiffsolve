@@ -1,0 +1,5 @@
+lxml==3.6.4
+python-dateutil==2.5.3
+requests==2.11.1
+slugify==1.2.1
+
