@@ -61,8 +61,9 @@ class Solver:
             for screening in screenings:
                 time = screening.date.strftime('%H:%M')
                 movie = screening.movie
-                screening = '{} {}'.format(time, movie)
+                screening = '{}\n{} {}'.format(screening.venue, time, movie)
                 ds.append({date: screening})
+
             # print(screenings)
         for d in ds:
             w.writerow(d)
