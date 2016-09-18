@@ -59,6 +59,14 @@ class Solver:
         for date, screenings in sorted(d.items(), key=lambda kv: kv[0]):
             # print(date)
             for screening in screenings:
+                ## Not really good in any way, but maybe filter out some times somewhere
+                # screening_time = screening.date.time()
+                # screening_date = screening.date.date()
+
+                # if screening_date.day not in (17, 18, 24, 25):
+                #     if screening_time.hour < 15 and screening_time.minute < 45:
+                #         continue
+
                 time = screening.date.strftime('%H:%M')
                 movie = screening.movie
                 screening = '{}\n{} {}'.format(screening.venue, time, movie)
